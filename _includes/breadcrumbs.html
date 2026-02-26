@@ -1,12 +1,18 @@
-<div id="breadcrumbs">
-    {% assign crumbs = page.url | remove:'/index.html' | split: '/' %}
-    <a href="/">Home</a>
-    {% for crumb in crumbs offset: 1 %}
-    {% if forloop.last %}
-    / {{ page.title }}
-    {% else %}
-    / <a
-        href="{% assign crumb_limit = forloop.index | plus: 1 %}{% for crumb in crumbs limit: crumb_limit %}{{ crumb | append: '/' | replace:'without-plugin/','without-plugins/' }}{% endfor %}">{{ crumb | replace:'-',' ' | remove:'.html' | capitalize }}</a>
-    {% endif %}
+<p class="llnl-breadcrumb fs-13 mb-50"><br /><a class="text-impact-blue text-decoration-underline-hover llnl-breadcrumb-link fw-semibold" href="{{ site.baseurl }}/">Home</a>
+    {% capture page_url_without_index_html %}{{ page.url | remove: "/index.html" }}{% endcapture %}
+    {% assign splitted_url_parts = page_url_without_index_html | split: '/' %}
+    {% capture forLoopMaxInt %}{{ splitted_url_parts.size | minus:1 }}{% endcapture %}
+    {% for i in (1..forLoopMaxInt) %}
+        {% assign isLast = forloop.last %}
+        {% capture current_breadcrumb_url %}{{next_prepender}}/{{ splitted_url_parts[i] }}/index.html{% endcapture %}
+        {% capture current_breadcrumb_md_url %}{{next_prepender}}/{{ splitted_url_parts[i] }}/{% endcapture %}
+        {% capture next_prepender %}{{next_prepender}}/{{ splitted_url_parts[i] }}{% endcapture %}
+        {% for breadcrumb_page in site.pages %}
+            {% if current_breadcrumb_url == breadcrumb_page.url or current_breadcrumb_md_url == breadcrumb_page.url  %}
+                {% if i == forLoopMaxInt %}class="active"{% endif %}<i class="fa fa-regular fa-chevron-right text-carbon-gray ms-2"></i>
+                    {% capture breadcrumb_page_page_url_without_index_html %}{{ breadcrumb_page.url | remove: "index.html" }}{% endcapture %}
+                    <a class="text-impact-blue llnl-breadcrumb-link ms-2 fw-semibold {% if isLast %} text-black text-decoration-none  {% else %} text-decoration-underline-hover {% endif %}"{% unless isLast %} href="{{breadcrumb_page_page_url_without_index_html}}"{% endunless %}>{{breadcrumb_page.breadcrumb}}</a>
+            {% endif %}
+        {% endfor %}
     {% endfor %}
-</div>
+</p>

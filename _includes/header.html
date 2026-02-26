@@ -1,30 +1,50 @@
-<nav id="header-slim" class="navbar navbar-default">
-
+<!-- Desktop menu -->
+<header class="navbar navbar-expand-lg border-top border-10 border-top-lab-blue d-none d-lg-block bg-livermorium-ice">
   <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#siteNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-
-      <p id="llnl-menu-tab" class="pull-left"><a href="https://www.llnl.gov"></a></p>
-      <a class="navbar-brand" href="{{ site.baseurl }}/">{{ site.title }}</a>
+    <div class="llnl-logo-wrap">
+      <div id="llnl-logo">
+        <a href="https://www.llnl.gov"><img src="/assets/images/llnl-logo.png" alt="LLNL Logo"></a>
+      </div>
     </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon text-azure"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <a class=" d-none d-lg-inline text-lab-blue text-decoration-none fw-bold border-1 border-black pe-3 mx-2 fs-18 text-azure" href="/">{{ site.title }}</a>
 
-    <div id="siteNavbar" class="collapse navbar-collapse">
-      <ul class="nav navbar-nav navbar-right navbar-collapse">
-        {% if page.path == "index.md" %} <li class="active"> {% else %} <li> {% endif %}
-          <a href="{{ site.baseurl }}/">Home</a></li>
-        {% for node in site.pages reversed %}
-          {% unless node.path == "index.md" %}
-            {% if node.url == page.url %} <li class="active"> {% else %} <li> {% endif %}
-              <a href="{{ node.url | prepend: site.baseurl }}">{{ node.title }}</a></li>
-          {% endunless %}
-        {% endfor %}
-        <li id="github"><a href="https://github.com/llnl/{{ site.githubrepo }}"><span class="fa fa-github fa-lg"></span></a></li>
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link text-azure" href="{{ site.repo_url }}"><i class="fa fa-regular fa-github fa-lg d-none d-lg-inline" aria-hidden="true"></i><span class="d-lg-none">LLNL GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-azure" href="https://x.com/Livermore_Comp"><i class="fa-brands fa-x-twitter fa-lg d-none d-lg-inline" aria-hidden="true"></i><span class="d-lg-none">LLNL Computing on X</span></a>
+        </li>
       </ul>
     </div>
-
   </div>
-</nav>
+</header>
+
+<!-- Mobile menu -->
+<header class="navbar navbar-expand-lg nav border-top border-10 border-top-lab-blue d-lg-none bg-livermorium-ice">
+    <div class="llnl-logo-wrap">
+      <div id="llnl-logo">
+        <a href="https://www.llnl.gov"><img src="/assets/images/llnl-logo.png" alt="LLNL Logo"></a>
+      </div>
+    </div>
+    <div class="navbar me-auto">
+      <a class="text-azure text-decoration-none fw-bold" href="/">{{ site.title }}</a>
+    </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon text-azure"></span>
+    </button>
+    <div class="collapse navbar-collapse ps-5 bg-dark-grey" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link ps-4" href="{{ site.repo_url }}"><i class="fa fa-regular fa-github fa-lg d-none d-lg-inline" aria-hidden="true"></i><span class="d-lg-none">LLNL GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link ps-4" href="https://x.com/Livermore_Comp"><i class="fa-brands fa-x-twitter fa-lg d-none d-lg-inline" aria-hidden="true"></i><span class="d-lg-none">Livermore_Comp on X</span></a>
+        <li><i class="fa-brands fa-x-twitter"></i></li>
+      </ul>
+    </div>
+</header>
